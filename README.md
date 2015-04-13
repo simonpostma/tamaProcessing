@@ -11,3 +11,5 @@ For educational purposes
 Use LEFT-ARROW and RIGHT-ARROW to navigate the menu
 
 Use DOWN-ARROW to confirm a menu selection
+
+hallo
