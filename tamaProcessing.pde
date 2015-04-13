@@ -34,8 +34,8 @@ void setup() {                                 // dit wordt als allereerste éé
   size(width, height);                         // Window size
   frameRate(2);                                // Set framerate
   achtergrond = loadImage("achtergrond.png");  // Achtergrond inladen
-  tamaAvatar_01 = loadImage("chars/tama_01.gif"); // Character afbeelding inladen
-  tamaAvatar_02 = loadImage("chars/tama_02.gif"); // Character afbeelding inladen
+  tamaAvatar_01 = loadImage("chars/tamaB_01.gif"); // Character afbeelding inladen
+  tamaAvatar_02 = loadImage("chars/tamaB_02.gif"); // Character afbeelding inladen
   TamIcon1 = loadImage("menu/TamIcon1.gif");   // 'Light' afbeelding inladen
   TamIcon2 = loadImage("menu/TamIcon2.gif");   // 'Game' afbeelding inladen
   TamIcon3 = loadImage("menu/TamIcon3.gif");   // 'Medicine' afbeelding inladen
