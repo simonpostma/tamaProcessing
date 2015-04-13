@@ -5,7 +5,7 @@ import ddf.minim.*;
   AudioSample Beep;                           // Voorbereiden audio sample
   
   PImage achtergrond;                         // Voorbereiden achtergrond afbeelding
-  PImage tamaAvatar;                          // Voorbereiden character afbeelding
+  PImage tamaAvatar_01,tamaAvatar_02;                          // Voorbereiden character afbeelding
   
   PImage TamIcon1, TamIcon2, TamIcon3, TamIcon4, TamIcon5, TamIcon6, TamIcon7, TamIcon8;                           
 
@@ -24,8 +24,8 @@ import ddf.minim.*;
   boolean tamaLights = true;                  // True = lights on, False = lights off
   
   int tamaMenuTimer = 0;                      // Reset the menu display timer
-  int tamaPosX = 70;                          // Set the initial position of Tama
-  int tamaPosY = 95;
+  int tamaPosX;                          // Set the initial position of Tama
+  int tamaPosY;
   int width = 140;                            // Set the window size
   int height = 170;
 
@@ -34,7 +34,8 @@ void setup() {                                 // dit wordt als allereerste éé
   size(width, height);                         // Window size
   frameRate(2);                                // Set framerate
   achtergrond = loadImage("achtergrond.png");  // Achtergrond inladen
-  tamaAvatar = loadImage("chars/tama_01.png"); // Character afbeelding inladen
+  tamaAvatar_01 = loadImage("chars/tama_01.gif"); // Character afbeelding inladen
+  tamaAvatar_02 = loadImage("chars/tama_02.gif"); // Character afbeelding inladen
   TamIcon1 = loadImage("menu/TamIcon1.gif");   // 'Light' afbeelding inladen
   TamIcon2 = loadImage("menu/TamIcon2.gif");   // 'Game' afbeelding inladen
   TamIcon3 = loadImage("menu/TamIcon3.gif");   // 'Medicine' afbeelding inladen
@@ -42,7 +43,7 @@ void setup() {                                 // dit wordt als allereerste éé
   TamIcon5 = loadImage("menu/TamIcon5.gif");   // 'Stats' afbeelding inladen
   TamIcon6 = loadImage("menu/TamIcon6.gif");   // 'Discipline' afbeelding inladen
   TamIcon7 = loadImage("menu/TamIcon7.gif");   // 'Alert' afbeelding inladen
-  TamIcon8 = loadImage("menu/TamIcon8.png");   // 'Food' afbeelding inladen
+  TamIcon8 = loadImage("menu/TamIcon8.gif");   // 'Food' afbeelding inladen
   minim = new Minim(this);                     // Geluiden laden
   Beep = minim.loadSample("beep.wav");         // Geluiden laden
 }
@@ -52,8 +53,7 @@ void draw() {
   funcTamaHunger();                            // Make Tama hungry
   funcTamaThirst();                            // Make Tama Thirsty
   funcTamaTired();                             // Make Tama Tired
-  funcShowTama(tamaPosX, tamaPosY);            // Display Tama
-  moveTama();                                  // Make Tama look alive
+  showTama();                                  // Make Tama look alive
   tamaAlert();                                 // Let the player know when Tama wants something
   tamaMenuSelection();                         // Let the player browse the menu
   tamaMenuFixer();                             // Fix up the menu a little
