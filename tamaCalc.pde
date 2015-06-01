@@ -31,10 +31,11 @@ void funcTamaTantrumHandler() {
 }
 
 void funcHeartMonitor() {                    // If any of Tama's stats get under the death treshold, it's time to say bye bye :'(
-   if (tamaHunger < tamaDeathTreshold || 
-       tamaThirst < tamaDeathTreshold || 
-       tamaTired < tamaDeathTreshold   ) {      
-   tamaAnimState = 5;
-   tamaIsAlive = false;
+   if ( tamaHunger < tamaDeathTreshold || tamaThirst < tamaDeathTreshold || tamaTired < tamaDeathTreshold   ) {      
+     if(tamaIsAlive == true) {
+       tamaAnimState = 5;
+       Discipline.trigger();
+       tamaIsAlive = false;
+     }
    }
 }

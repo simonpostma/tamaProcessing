@@ -3,7 +3,7 @@
 void tamaDiscipline() {
   if (tamaTantrum == true) {  
     Discipline.trigger();
-    tamaTantrum = false;    
+    tamaTantrum = false;
     tamaAnimState = 4;
   }
   else { 

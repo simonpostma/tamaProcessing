@@ -10,34 +10,43 @@
   int tamaDeathAnimState = 0;                         // 'DEATH' animation related image counter  
   int tamaEggAnimState = 0;                           // 'EGG' animation related image counter
 
-void showTama() {                                     // the function that handles all the animations based on states
+void showTama() {    // the function that handles all the animations based on states
+// Hide tama, for menu's and stuff
+  if (tamaAnimState == -1) {
+    
+  }
+
 // IDLE animation  
   if (tamaAnimState == 0) {  
     if (tamaMoveState == 0){                                  // If this state is active (which it is when the program just starts) 
       if (disableMenuInput == true) disableMenuInput = false; // Reset menu input protection during idle animation
+      if (tamaIsIll == true) tamaAnimState = 3;               // If tama is Ill, skip to that animation instead
       tamaPosX = 70;                                          // Set this X coordinate for the tama pic
       tamaPosY = 90;                                          // and this Y coordinate
-      tamaMoveState = 1;                                      // Flick over the movement state for the next one.
+      tamaMoveState += 1;                                     // Flick over the movement state for the next one.
       imageMode(CENTER);                                      // Set the image mode for accurate drawing
       image(tamaAvatar_02, tamaPosX, tamaPosY);               // Show a picture on a specific position
     } 
-    else if (tamaMoveState == 1) {                    // If this state is active
-      tamaPosX -= 10;                                 // Move Tama this much on the X axis
-      tamaPosY -= 3;                                  // And this much on the Y axis
-      tamaMoveState = 2;                              // Change state for the next movement
+    else if (tamaMoveState == 1) {                            // If this state is active
+      if (tamaIsIll == true) tamaAnimState = 3;               // If tama is Ill, skip to that animation instead
+      tamaPosX = 60;                                         // Move Tama this much on the X axis
+      tamaPosY = 87;                                          // And this much on the Y axis
+      tamaMoveState += 1;                                     // Change state for the next movement
       imageMode(CENTER);
-      image(tamaAvatar_01, tamaPosX, tamaPosY);       // Display picture
+      image(tamaAvatar_01, tamaPosX, tamaPosY);               // Display picture
     } 
     else if (tamaMoveState == 2) {
-      tamaPosX += 10;
-      tamaPosY += 3;
-      tamaMoveState = 3;
+      if (tamaIsIll == true) tamaAnimState = 3;               // If tama is Ill, skip to that animation instead
+      tamaPosX = 70;
+      tamaPosY = 90;
+      tamaMoveState += 1;
       imageMode(CENTER);
       image(tamaAvatar_02, tamaPosX, tamaPosY);
     }
     else if (tamaMoveState == 3) {
-      tamaPosX += 10;
-      tamaPosY -= 3;
+      if (tamaIsIll == true) tamaAnimState = 3;               // If tama is Ill, skip to that animation instead
+      tamaPosX = 80;
+      tamaPosY = 87;
       tamaMoveState = 0;
       imageMode(CENTER);
       image(tamaAvatar_01, tamaPosX, tamaPosY);
@@ -47,29 +56,29 @@ void showTama() {                                     // the function that handl
   else if (tamaAnimState == 1) {
     disableMenuInput = true;
     if (tamaYesPlzState == 0){                         // If this state is active (which it is when the program just starts) 
-      tamaPosX = 70;                                   // Set this X coordinate for the tama pic
+      tamaPosX = 80;                                   // Set this X coordinate for the tama pic
       tamaPosY = 90;                                   // and this Y coordinate
-      tamaYesPlzState = 1;                             // Flick over the movement state for the next one.
+      tamaYesPlzState += 1;                            // Flick over the movement state for the next one.
       imageMode(CENTER);                               // Set the image mode for accurate drawing
       image(tamaYesPlz_01, tamaPosX, tamaPosY);        // Show a picture on a specific position
     } 
     else if (tamaYesPlzState == 1) {                   // If this state is active
-      tamaYesPlzState = 2;                             // Change state for the next movement
+      tamaYesPlzState += 1;                            // Change state for the next movement
       imageMode(CENTER);
       image(tamaYesPlz_02, tamaPosX, tamaPosY);        // Display picture
     } 
     else if (tamaYesPlzState == 2) {
-      tamaYesPlzState = 3;
+      tamaYesPlzState += 1;
       imageMode(CENTER);
       image(tamaYesPlz_01, tamaPosX, tamaPosY);
     }
     else if (tamaYesPlzState == 3) {
-      tamaYesPlzState = 4;
+      tamaYesPlzState += 1;
       imageMode(CENTER);
       image(tamaYesPlz_02, tamaPosX, tamaPosY);
     }
     else if (tamaYesPlzState == 4) {
-      tamaYesPlzState = 5;
+      tamaYesPlzState += 1;
       imageMode(CENTER);
       image(tamaYesPlz_01, tamaPosX, tamaPosY);
       tamaAnimState = 0;
@@ -82,22 +91,22 @@ void showTama() {                                     // the function that handl
     if (tamaNoThxState == 0){                         // If this state is active (which it is when the program just starts) 
       tamaPosX = 70;                                  // Set this X coordinate for the tama pic
       tamaPosY = 90;                                  // and this Y coordinate
-      tamaNoThxState = 1;                             // Flick over the movement state for the next one.
+      tamaNoThxState += 1;                             // Flick over the movement state for the next one.
       imageMode(CENTER);                              // Set the image mode for accurate drawing
       image(tamaNoThx_01, tamaPosX, tamaPosY);        // Show a picture on a specific position
     } 
     else if (tamaNoThxState == 1) {                   // If this state is active
-      tamaNoThxState = 2;                             // Change state for the next movement
+      tamaNoThxState += 1;                             // Change state for the next movement
       imageMode(CENTER);
       image(tamaNoThx_02, tamaPosX, tamaPosY);        // Display picture
     } 
     else if (tamaNoThxState == 2) {
-      tamaNoThxState = 3;
+      tamaNoThxState += 1;
       imageMode(CENTER);
       image(tamaNoThx_01, tamaPosX, tamaPosY);
     }
     else if (tamaNoThxState == 3) {
-      tamaNoThxState = 4;
+      tamaNoThxState += 1;
       imageMode(CENTER);
       image(tamaNoThx_02, tamaPosX, tamaPosY);
       tamaAnimState = 0;
@@ -110,22 +119,22 @@ void showTama() {                                     // the function that handl
       if (disableMenuInput == true) disableMenuInput = false; // Reset menu input protection during idle animation
       tamaPosX = 70;                                    // Set this X coordinate for the tama pic
       tamaPosY = 88;                                    // and this Y coordinate
-      tamaIllAnimState = 1;                             // Flick over the movement state for the next one.
+      tamaIllAnimState += 1;                             // Flick over the movement state for the next one.
       imageMode(CENTER);                                // Set the image mode for accurate drawing
       image(tamaIllAnim_01, tamaPosX, tamaPosY);        // Show a picture on a specific position
     } 
     else if (tamaIllAnimState == 1) {                   // If this state is active
-      tamaIllAnimState = 2;                             // Change state for the next movement
+      tamaIllAnimState += 1;                             // Change state for the next movement
       imageMode(CENTER);
       image(tamaIllAnim_02, tamaPosX, tamaPosY);        // Display picture
     } 
     else if (tamaIllAnimState == 2) {
-      tamaIllAnimState = 3;
+      tamaIllAnimState += 1;
       imageMode(CENTER);
       image(tamaIllAnim_01, tamaPosX, tamaPosY);
     }
     else if (tamaIllAnimState == 3) {
-      tamaIllAnimState = 4;
+      tamaIllAnimState += 1;
       imageMode(CENTER);
       image(tamaIllAnim_02, tamaPosX, tamaPosY);
       tamaIllAnimState = 0;
@@ -137,26 +146,26 @@ void showTama() {                                     // the function that handl
     if (tamaOuchAnimState == 0){                         // If this state is active (which it is when the program just starts) 
       tamaPosX = 80;                                     // Set this X coordinate for the tama pic
       tamaPosY = 90;                                     // and this Y coordinate
-      tamaOuchAnimState = 1;                             // Flick over the movement state for the next one.
+      tamaOuchAnimState += 1;                             // Flick over the movement state for the next one.
       imageMode(CENTER);                                 // Set the image mode for accurate drawing
       image(tamaOuchAnim_01, tamaPosX, tamaPosY);        // Show a picture on a specific position
     } 
     else if (tamaOuchAnimState == 1) {                   // If this state is active
-      tamaOuchAnimState = 2;                             // Change state for the next movement
+      tamaOuchAnimState += 1;                             // Change state for the next movement
       imageMode(CENTER);
       image(tamaOuchAnim_02, tamaPosX, tamaPosY);        // Display picture
     } 
     else if (tamaOuchAnimState == 2) {
-      tamaOuchAnimState = 3;
+      tamaOuchAnimState += 1;
       imageMode(CENTER);
       image(tamaOuchAnim_01, tamaPosX, tamaPosY);
     }
     else if (tamaOuchAnimState == 3) {
-      tamaOuchAnimState = 4;
+      tamaOuchAnimState += 1;
       imageMode(CENTER);
-      image(tamaOuchAnim_02, tamaPosX, tamaPosY);
-      tamaAnimState = 0;
-      tamaOuchAnimState = 0;
+      image(tamaOuchAnim_02, tamaPosX, tamaPosY);  
+      tamaAnimState = 0;                                 // jump back to idle animation
+      tamaOuchAnimState = 0;                             // Reset the animation counter
     }
   }
 // DEATH animation
@@ -164,91 +173,83 @@ void showTama() {                                     // the function that handl
     if (tamaDeathAnimState == 0){                        // If this state is active (which it is when the program just starts) 
       tamaPosX = 71;                                     // Set this X coordinate for the tama pic
       tamaPosY = 86;                                     // and this Y coordinate
-      tamaDeathAnimState = 1;                            // Flick over the movement state for the next one.
+      tamaDeathAnimState += 1;                            // Flick over the movement state for the next one.
       imageMode(CENTER);                                 // Set the image mode for accurate drawing
       image(tamaDeathAnim_01, tamaPosX, tamaPosY);       // Show a picture on a specific position
     } 
     else if (tamaDeathAnimState == 1) {                  // If this state is active
-      tamaDeathAnimState = 2;                            // Change state for the next movement
+      tamaDeathAnimState += 1;                            // Change state for the next movement
       imageMode(CENTER);
       image(tamaDeathAnim_02, tamaPosX, tamaPosY);       // Display picture
-    } 
-    else if (tamaDeathAnimState == 2) {
-      tamaDeathAnimState = 3;
-      imageMode(CENTER);
-      image(tamaDeathAnim_01, tamaPosX, tamaPosY);
-    }
-    else if (tamaDeathAnimState == 3) {
-      tamaDeathAnimState = 4;
-      imageMode(CENTER);
-      image(tamaDeathAnim_02, tamaPosX, tamaPosY);
-      tamaDeathAnimState = 0;
+      tamaDeathAnimState = 0;                            // Restart the animation loop
     }
   }
 // EGG animation
   else if (tamaAnimState == 6) {
     disableMenuInput = true;
-    if (tamaEggAnimState == 0){                        // If this state is active (which it is when the program just starts) 
+    if (tamaEggAnimState == 0){                          // If this state is active (which it is when the program just starts) 
       tamaPosX = 71;                                     // Set this X coordinate for the tama pic
       tamaPosY = 86;                                     // and this Y coordinate
-      tamaEggAnimState = 1;                            // Flick over the movement state for the next one.
+      tamaEggAnimState += 1;                              // Flick over the movement state for the next one.
       imageMode(CENTER);                                 // Set the image mode for accurate drawing
-      image(tamaEggAnim_01, tamaPosX, tamaPosY);       // Show a picture on a specific position
+      image(tamaEggAnim_01, tamaPosX, tamaPosY);         // Show a picture on a specific position
     } 
-    else if (tamaEggAnimState == 1) {                  // If this state is active
-      tamaEggAnimState = 2;                            // Change state for the next movement
+    else if (tamaEggAnimState == 1) {                    // If this state is active
+      tamaEggAnimState += 1;                              // Change state for the next movement
       imageMode(CENTER);
-      image(tamaEggAnim_02, tamaPosX, tamaPosY);       // Display picture
+      image(tamaEggAnim_02, tamaPosX, tamaPosY);         // Display picture
     } 
     else if (tamaEggAnimState == 2) {
-      tamaEggAnimState = 3;
+      tamaEggAnimState += 1;
       imageMode(CENTER);
       image(tamaEggAnim_01, tamaPosX, tamaPosY);
     }
     else if (tamaEggAnimState == 3) {
-      tamaEggAnimState = 4;
+      tamaEggAnimState += 1;
       imageMode(CENTER);
       image(tamaEggAnim_02, tamaPosX, tamaPosY);
     }
     else if (tamaEggAnimState == 4) {
-      tamaEggAnimState = 5;
+      tamaEggAnimState += 1;
       imageMode(CENTER);
       image(tamaEggAnim_01, tamaPosX, tamaPosY);
     }
     else if (tamaEggAnimState == 5) {
-      tamaEggAnimState = 6;
+      tamaEggAnimState += 1;
       imageMode(CENTER);
       image(tamaEggAnim_02, tamaPosX, tamaPosY);
     }
     else if (tamaEggAnimState == 6) {
-      tamaEggAnimState = 7;
+      tamaEggAnimState += 1;
       imageMode(CENTER);
       image(tamaEggAnim_01, tamaPosX, tamaPosY);
     }
     else if (tamaEggAnimState == 7) {
-      tamaEggAnimState = 8;
+      tamaEggAnimState += 1;
       imageMode(CENTER);
       image(tamaEggAnim_02, tamaPosX, tamaPosY);
     }
     else if (tamaEggAnimState == 8) {
-      Hatch.trigger();
-      tamaEggAnimState = 9;
+      Hatch.trigger();                                  // Trigger the hatching sound
+      tamaEggAnimState += 1;
       imageMode(CENTER);
       image(tamaEggAnim_01, tamaPosX, tamaPosY);
     }
     else if (tamaEggAnimState == 9) {
-      tamaEggAnimState = 10;
+      tamaEggAnimState += 1;      
+      tamaPosX = 72;                                     // Set this X coordinate for the tama pic
+      tamaPosY = 84;                                     // and this Y coordinate
       imageMode(CENTER);
       image(tamaEggAnim_03, tamaPosX, tamaPosY);
     }
     else if (tamaEggAnimState == 10) {
-      tamaEggAnimState = 11;
+      tamaEggAnimState += 1;
       imageMode(CENTER);
       image(tamaEggAnim_03, tamaPosX, tamaPosY);
-      tamaAnimState = 0;      
-      tamaIsEgg = false;
-      tamaIsAlive = true;
-      tamaEggAnimState = 0;
+      tamaAnimState = 0;                                // Reset to idle animation
+      tamaIsEgg = false;                                // Tama is no longer an egg after hatchin
+      tamaIsAlive = true;                               // Tama is now considered alive
+      tamaEggAnimState = 0;                             // Reset the egg animation counter
     }
   }
 };

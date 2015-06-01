@@ -2,7 +2,6 @@
 
 void tamaMedicate() {
   if (tamaIsIll == true) {  
-    Discipline.trigger();
     tamaIsIll = false;
     tamaHungerSpeed = tamaOriginalHungerSpeed;
     tamaThirstSpeed = tamaOriginalThirstSpeed;
