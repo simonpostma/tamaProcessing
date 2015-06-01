@@ -1,21 +1,44 @@
-void keyPressed() {                                                          // This stuff deals with buttons being pressed
-  if (keyCode == RIGHT) {                                                    // If Right-Arrow is pressed
-    Beep.trigger();                                                          // Play the beep sound
-    tamaMenuSelectionState = tamaMenuSelectionState + 1;                     // Add to the menu selection state
-    tamaMenuTimer = 10;                                                      // Set the menu count down timer to 10
+// ===== This stuff deals with buttons being pressed and their effects ====
+
+void keyPressed() {       
+  if (keyCode == RIGHT && disableMenuInput == false) {                          // If Right-Arrow is pressed
+    if (tamaIsAlive == true) {
+      buttonPressExtras();
+      tamaMenuSelectionState = tamaMenuSelectionState + 1;                      // Add to the menu selection state                                               
+    }
   }
-  if (keyCode == LEFT) {
-    Beep.trigger();
-    tamaMenuSelectionState = tamaMenuSelectionState - 1;
-    tamaMenuTimer = 10;
+  if (keyCode == LEFT && disableMenuInput == false) {
+    if (tamaIsAlive == true) {
+      buttonPressExtras();
+      tamaMenuSelectionState = tamaMenuSelectionState - 1;
+    }
   }
-  if (keyCode == DOWN) {                                                      // If Down is pressed
-     if (tamaMenuSelectionState == 1) {Beep.trigger(); tamaHunger = 100000;}  // Play beep and trigger desired effect.
-     if (tamaMenuSelectionState == 2) {Beep.trigger(); tamaTired = 100000;}
-     if (tamaMenuSelectionState == 3) {}
-     if (tamaMenuSelectionState == 4) {}
-     if (tamaMenuSelectionState == 5) {Beep.trigger(); tamaThirst = 100000;}
-     if (tamaMenuSelectionState == 6) {}
-     else if (tamaMenuSelectionState == 7) {}
+  if (keyCode == DOWN && disableMenuInput == false) {         // If Down is pressed
+     if (tamaIsAlive == true) {
+       buttonPressExtras();
+       if (tamaMenuSelectionState == 1) {tamaFeed();}                           // What happens when using the food menu
+       if (tamaMenuSelectionState == 2) {tamaSleep();}                          // The lightbulb menu
+       if (tamaMenuSelectionState == 3) {}                                      // The play/game menu
+       if (tamaMenuSelectionState == 4) {tamaMedicate();}                       // The medication menu
+       if (tamaMenuSelectionState == 5) {tamaDrink();}                          // The bath menu
+       if (tamaMenuSelectionState == 6) {}                                      // The stats menu
+       else if (tamaMenuSelectionState == 7) {tamaDiscipline();}                // The discipline menu
+     }
   }
+  if (keyCode == UP && disableMenuInput == false) {
+    if (tamaIsAlive == true && tamaIsEgg == false) {
+      buttonPressExtras();
+      tamaHunger = 40000;
+      tamaIsEgg = false;      
+    }
+    if (tamaIsAlive == false && tamaIsEgg == false)  {
+      tamaFullRestart();
+    }
+  }
+};
+
+void buttonPressExtras() { 
+   Beep.trigger();
+   tamaMenuTimer = 10;                                                        // Set the menu count down timer to 10
+   return;
 }
