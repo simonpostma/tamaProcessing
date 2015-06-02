@@ -9,10 +9,12 @@
   int tamaOuchAnimState = 0;                          // 'OUCH!' animation related image counter 
   int tamaDeathAnimState = 0;                         // 'DEATH' animation related image counter  
   int tamaEggAnimState = 0;                           // 'EGG' animation related image counter
+  int tamaLightsAnimState = 0;                        // 'LIGHTS OUT' animations related image counter
+  int tamaSleepAnimState = 0;                         // 'SLEEPING' animations related image counter
 
 void showTama() {    // the function that handles all the animations based on states
 // Hide tama, for menu's and stuff
-  if (tamaAnimState == -1) {
+  if (tamaAnimState == -1 || tamaAnimState == -2) {
     
   }
 
@@ -252,4 +254,54 @@ void showTama() {    // the function that handles all the animations based on st
       tamaEggAnimState = 0;                             // Reset the egg animation counter
     }
   }
-};
+// LIGHTS OUT animation
+  else if (tamaAnimState == 7) {
+    if (tamaIsAwake == true) {
+      if (tamaLightsAnimState == 0){                        // If this state is active (which it is when the program just starts) 
+      tamaPosX = 71;                                       // Set this X coordinate for the tama pic
+      tamaPosY = 86;                                       // and this Y coordinate
+      tamaLightsAnimState += 1;                             // Flick over the movement state for the next one.
+      imageMode(CENTER);                                   // Set the image mode for accurate drawing
+      image(tamaLightsAnim_01, tamaPosX, tamaPosY);         // Show a picture on a specific position
+      } 
+      else if (tamaLightsAnimState == 1) {                  // If this state is active
+      tamaLightsAnimState += 1;                             // Change state for the next movement
+      imageMode(CENTER);
+      image(tamaLightsAnim_02, tamaPosX, tamaPosY);          // Display picture
+      tamaLightsAnimState = 0;                              // Restart the animation loop
+      }
+    }
+    if (tamaIsAwake == false) {
+      if (tamaLightsAnimState == 0){                        // If this state is active (which it is when the program just starts) 
+      tamaPosX = 71;                                       // Set this X coordinate for the tama pic
+      tamaPosY = 86;                                       // and this Y coordinate
+      tamaLightsAnimState += 1;                             // Flick over the movement state for the next one.
+      imageMode(CENTER);                                   // Set the image mode for accurate drawing
+      image(tamaLightsAnim_03, tamaPosX, tamaPosY);         // Show a picture on a specific position
+      } 
+      else if (tamaLightsAnimState == 1) {                  // If this state is active
+      tamaLightsAnimState += 1;                             // Change state for the next movement
+      imageMode(CENTER);
+      image(tamaLightsAnim_03, tamaPosX, tamaPosY);         // Display picture
+      tamaLightsAnimState = 0;                              // Restart the animation loop
+      }
+    }
+  }
+ 
+// SLEEPING animation
+     else if (tamaAnimState == 8) {
+    if (tamaSleepAnimState == 0){                         // If this state is active (which it is when the program just starts) 
+      tamaPosX = 71;                                      // Set this X coordinate for the tama pic
+      tamaPosY = 86;                                      // and this Y coordinate
+      tamaSleepAnimState += 1;                            // Flick over the movement state for the next one.
+      imageMode(CENTER);                                  // Set the image mode for accurate drawing
+      image(tamaSleepAnim_01, tamaPosX, tamaPosY);        // Show a picture on a specific position
+    } 
+    else if (tamaSleepAnimState == 1) {                   // If this state is active
+      tamaSleepAnimState += 1;                            // Change state for the next movement
+      imageMode(CENTER);
+      image(tamaSleepAnim_02, tamaPosX, tamaPosY);        // Display picture
+      tamaSleepAnimState = 0;                             // Restart the animation loop
+    }
+  }
+}

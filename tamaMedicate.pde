@@ -4,7 +4,6 @@ void tamaMedicate() {
   if (tamaIsIll == true) {  
     tamaIsIll = false;
     tamaHungerSpeed = tamaOriginalHungerSpeed;
-    tamaThirstSpeed = tamaOriginalThirstSpeed;
     tamaTiredSpeed = tamaOriginalTiredSpeed;
     tamaAnimState = 4;
   }

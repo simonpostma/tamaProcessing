@@ -13,10 +13,12 @@ boolean enableDebugOutput = true;
   PImage tamaAvatar_01,tamaAvatar_02;                      // Prepare basic tamagotchi avatar
   PImage tamaNoThx_01, tamaNoThx_02;                       // prepare the 'shake no' animation images
   PImage tamaYesPlz_01, tamaYesPlz_02;                     // prepare the 'exhalt yes' animation images
-  PImage tamaIllAnim_01, tamaIllAnim_02;                   // prepare the 'ilness' animation related image counter
-  PImage tamaOuchAnim_01, tamaOuchAnim_02;                 // prepare the 'OUCH!' animation related image counter
-  PImage tamaDeathAnim_01, tamaDeathAnim_02;               // prepare the 'DEATH' animation related image counter
-  PImage tamaEggAnim_01, tamaEggAnim_02, tamaEggAnim_03;   // prepare the 'EGG' animation related image counter
+  PImage tamaIllAnim_01, tamaIllAnim_02;                   // prepare the 'ilness' animation related images
+  PImage tamaOuchAnim_01, tamaOuchAnim_02;                 // prepare the 'OUCH!' animation related images
+  PImage tamaDeathAnim_01, tamaDeathAnim_02;               // prepare the 'DEATH' animation related images
+  PImage tamaEggAnim_01, tamaEggAnim_02, tamaEggAnim_03;   // prepare the 'EGG' animation related images
+  PImage tamaLightsAnim_01, tamaLightsAnim_02, tamaLightsAnim_03; // prepare the 'LIGHTS OFF' animation related images
+  PImage tamaSleepAnim_01, tamaSleepAnim_02;               // prepare the 'SLEEPING' animation related images
   
 // ==== Program Initialization =====                   
 
@@ -38,30 +40,25 @@ boolean enableDebugOutput = true;
   boolean disableMenuInput = false;                        // Protect menu from being used during certain sequences
   int tamaMenuTimer = 0;                                   // Reset the menu display timer                         
   int tamaMenuSelectionState = 8;                          // Initialize menu state
-  int tamaActionMenuTimer = 0;
+  int tamaActionMenuTimer = 0;                             // Countdown before closing action menu
  
 // Defining Tama's livelihood
   boolean tamaIsEgg = true;                                // Variable that keeps track of tama's egg period
   boolean tamaIsAlive = false;                             // Variable that keeps track of tama's life
+  boolean tamaIsAwake = false;                             // Variable that keeps track of tama's waking state
   int tamaDeathTreshold = 99000;                           // Below which stat value does Tama die ?
  
 // Hunger related
   int tamaHungerFull = 99999;                              // Tama's maximum hunger value
   int tamaHunger = tamaHungerFull;                         // Hunger value
   int tamaOriginalHungerSpeed = 1;                         // How fast does tama get hungry?
-  int tamaHungerSpeed = tamaOriginalHungerSpeed;           
-  
-// Thirst Related
-  int tamaThirstFull = 99999;                              // Tama's maximum Thirst value
-  int tamaThirst = tamaThirstFull;                         // Thirst value
-  int tamaOriginalThirstSpeed = 1;                         // How fast does tama get thirsty?
-  int tamaThirstSpeed = tamaOriginalThirstSpeed;           
+  int tamaHungerSpeed = tamaOriginalHungerSpeed;                
   
 // Sleepiness related
   int tamaTiredFull =  99999;                              // Tama's maximum sleepiness value
   int tamaTired = tamaTiredFull;                           // Energy value
   int tamaOriginalTiredSpeed = 1;                          // How fast does tama get tired?
-  int tamaTiredSpeed = tamaOriginalTiredSpeed;             
+  int tamaTiredSpeed = tamaOriginalTiredSpeed;               
  
 // Illness related
   boolean tamaIsIll = false;                               // Init tama's ilness state
@@ -72,7 +69,7 @@ boolean enableDebugOutput = true;
   float  tamaTantrumChance = 0.005;                        // How big is the chance tama throws a tantrum?
   
 // Environment & Game state related stuff  
-  boolean tamaLights = true;                               // True = lights on, False = lights off
+  boolean tamaLightsOn = true;                             // True = lights on, False = lights off
   int tamaPosX;                                            // Set the initial position of Tama
   int tamaPosY; 
 
@@ -125,12 +122,19 @@ void setup() {                                             // Ran once at startu
   tamaEggAnim_01 = loadImage("chars/00/egg1.gif");            // Load 'egg' image 1
   tamaEggAnim_02 = loadImage("chars/00/egg2.gif");            // Load 'egg' image 2 
   tamaEggAnim_03 = loadImage("chars/00/egg3.gif");            // Load 'egg' image 3
+  
+  tamaLightsAnim_01 = loadImage("data/actionmenu/Dark0.gif");           // Load 'LIGHTS OFF' image 1
+  tamaLightsAnim_02 = loadImage("data/actionmenu/Dark1.gif");           // Load 'LIGHTS OFF' image 2 
+  tamaLightsAnim_02 = loadImage("data/actionmenu/Dark2.gif");           // Load 'LIGHTS OFF' image 3
+  
+  tamaSleepAnim_01 = loadImage("chars/01/tama_idle_01.gif");  // Load 'Sleeping' image 1
+  tamaSleepAnim_02 = loadImage("chars/01/tama_idle_02.gif");  // Load 'Sleeping' image 2
 }
 
 void draw() {
   background(achtergrond);                                   // Display background
   if (tamaIsAlive == true) {
-    funcTamaStats();                                         // Make tama hungry, thirsty and sleepy
+    funcTamaStats();                                         // Make tama hungry and sleepy
     funcTamaIllnessHandler();                                // Calculate if tama is ill or not
     funcTamaTantrumHandler();                                // Calculate if tama is throwing a tantrum or not
     tamaAlert();                                             // Let the player know when Tama wants something by showing the menu icon
@@ -150,9 +154,8 @@ void draw() {
     println("#============================#   " + "#=====================================#"  );    
     println("  Alive                " + tamaIsAlive + "        LEFTARROW    Navigate menu left." );
     println("  Hunger               " + tamaHunger + "       RIGHTARROW   Navigate menu right." );
-    println("  Thirst               " + tamaThirst + "       DOWNARROW    Select menu option."  );
-    println("  Tired                " + tamaTired + "       UPARROW      Kill / Respawn Tama." );    
-    println("  Illness              " + tamaIsIll);
+    println("  Tired                " + tamaTired + "       DOWNARROW    Select menu option."  );    
+    println("  Illness              " + tamaIsIll + "       UPARROW      Kill / Respawn Tama." );
     println("  Tantrum              " + tamaTantrum);
     println("  MenuSelectionState   " + tamaMenuSelectionState + "           To make tama sleep, use light.");    
     println("  Current animation    " + tamaAnimState + "           To give tama drink, use bathroom.");

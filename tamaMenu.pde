@@ -1,7 +1,7 @@
 // === This handles most of the menu related stuff ====
 
 void tamaAlert() {                                                                 // Function that shows if Tama needs something
-  if (tamaHunger < 99900 || tamaThirst < 99950 || tamaTired < 99890 ||
+  if (tamaHunger < 99900 || tamaTired < 99890 ||
       tamaIsIll == true || tamaTantrum == true ) {                                 // IF any of these conditions apply
     if (tamaIsAlive == true) {
       imageMode(CENTER);                                                           // Image fiddly stuff
