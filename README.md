@@ -12,4 +12,3 @@ For educational purposes
 * Use DOWN-ARROW to confirm/use a menu selection
 * Use UP-ARROW to kill tama, and respawn him when he's dead
 * To make tama sleep, use the light bulb menu option
-* To make tama drink, use the bathroom menu option
