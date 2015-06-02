@@ -9,7 +9,6 @@ void tamaFullRestart() {
   tamaOuchAnimState = 0;                               // 'OUCH!' animation related image counter
   tamaDeathAnimState = 0;                              // 'OUCH!' animation related image counter
   tamaHunger = tamaHungerFull;                         // Hunger value
-  tamaThirst = tamaThirstFull;                         // Thirst value
   tamaTired = tamaTiredFull;                           // Energy value
   tamaIsIll = false;                                   // Init tama's ilness state
   tamaTantrum = false;                                 // Init tama's tantrum state

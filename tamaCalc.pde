@@ -1,9 +1,8 @@
 // ==== Any background calculations are managed from this file ====
 
 void funcTamaStats() {                      
-  if (tamaIsAlive == true && tamaIsEgg == false) {  // The function that makes Tama hungry, thirsty and sleepy
+  if (tamaIsAlive == true && tamaIsEgg == false) {  // The function that makes Tama hungry and sleepy
     tamaHunger -= tamaHungerSpeed;
-    tamaThirst -= tamaThirstSpeed;
     tamaTired -= tamaTiredSpeed;
   }
 }
@@ -14,7 +13,6 @@ void funcTamaIllnessHandler() {
      if (numIllness < tamaIllnessChance) {   // If condition for illness is met
        tamaIsIll = true;                     // Tama becomes ill
        tamaHungerSpeed = tamaHungerSpeed * 2;
-       tamaThirstSpeed = tamaThirstSpeed * 2;
        tamaTiredSpeed = tamaTiredSpeed * 2;
        tamaAnimState = 3;                    // activate illness animation
      }
@@ -31,11 +29,14 @@ void funcTamaTantrumHandler() {
 }
 
 void funcHeartMonitor() {                    // If any of Tama's stats get under the death treshold, it's time to say bye bye :'(
-   if ( tamaHunger < tamaDeathTreshold || tamaThirst < tamaDeathTreshold || tamaTired < tamaDeathTreshold   ) {      
+   if ( tamaHunger < ( tamaDeathTreshold * 0.8 )  ) {      
      if(tamaIsAlive == true) {
        tamaAnimState = 5;
        Discipline.trigger();
        tamaIsAlive = false;
      }
+   return;
+   }
+   if (tamaTired < 99000) {
    }
 }
